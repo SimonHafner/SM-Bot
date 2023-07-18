@@ -114,7 +114,8 @@ def like_stories(username, password, usernames):
     except Exception as e:
         print(f"Couldn't extract submit button from page. {e}")
     
-    login_button.click()
+    # Use JavaScript to click the button
+    driver.execute_script("arguments[0].click();", login_button)
 
     # Warten Sie eine Weile, bis die Anmeldung verarbeitet wurde
     WebDriverWait(driver, 90).until(EC.staleness_of(login_button))
