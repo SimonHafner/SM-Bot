@@ -85,7 +85,7 @@ def like_stories(username, password, usernames):
     except Exception as e:
         print(f"Couldn't click the cookie button. {e}")
     
-    print("Clicked on: Accept all cookies.")
+    print("Clicked on 'Accept all cookies'")
 
     # Finden Sie das Eingabefeld für den Benutzernamen
     try:
@@ -119,52 +119,57 @@ def like_stories(username, password, usernames):
 
     # Warten Sie eine Weile, bis die Anmeldung verarbeitet wurde
     WebDriverWait(driver, 90).until(EC.staleness_of(login_button))
+    print("Login successful!")
 
     # Like stories of each follower
     for follower in usernames:
-        story_url = f"https://www.instagram.com/stories/{follower}"
-        driver.get(story_url)
+      story_url = f"https://www.instagram.com/stories/{follower}"
+      driver.get(story_url)
 
-        print("Checking username '" +str(follower) +"'")
+      # Hypothetical CSS selector for the "View Story" button
+      view_story_css_selector = "div.section"
 
-        # Check if the "View Story" button exists
-        try:
-            view_story_button = WebDriverWait(driver, 60).until(  # Increase wait time
-                EC.presence_of_element_located((By.XPATH, "//div/div/div[2]/div/div/div/div[1]/div[1]/section/div[1]/div/section/div/div[1]/div/div/div/div/div[3]/div"))
-            )
-            print("[TRUE] User -> " + follower + " has story up.")
-            # Execute JavaScript to click the button
-            driver.execute_script("arguments[0].click();", view_story_button)          
-            
-            try:
-                like_button = WebDriverWait(driver, 20).until(
-                    EC.presence_of_element_located((By.XPATH, "/html/body/div[2]/div/div/div[2]/div/div/div/div[1]/div[1]/section/div[1]/div/section/div/div[3]/div/div/div[2]/span/div"))
-                )
-                # Click on the like button or perform desired action
-                like_button.click()
-                print("Liked the story successfully!")
-            except NoSuchElementException:
-                try:
-                    like_button = WebDriverWait(driver, 120).until(
-                        EC.presence_of_element_located((By.XPATH, "/html/body/div[2]/div/div/div[2]/div/div/div/div[1]/div[1]/section/div[1]/div/section/div/div[3]/div/div/div[1]/span/div"))
-                    )
-                    # Click on the like button or perform desired action
-                    like_button.click()
-                    print("Liked the story successfully!")
-                except NoSuchElementException:
-                    # Both XPaths failed, skip to the next action or user
-                    print("Failed to like the story.")
-                    continue  # Assuming this is inside a loop
+      # Check if the "View Story" button exists
+      try:
+          view_story_button = WebDriverWait(driver, 60).until(  # Increase wait time
+              EC.presence_of_element_located((By.CSS_SELECTOR, view_story_css_selector))
+          )
+          print("[TRUE] User -> " + follower + " has story up.")
+          # Execute JavaScript to click the button
+          driver.execute_script("arguments[0].click();", view_story_button)          
 
-        except NoSuchElementException:
-            print("[FALSE] User -> " + follower + " has no story up.")
-            continue
+          # Hypothetical CSS selectors for the like button
+          like_button_css_selector_1 = "div.likeButton1"
+          like_button_css_selector_2 = "div.likeButton2"
 
+          try:
+              like_button = WebDriverWait(driver, 20).until(
+                  EC.presence_of_element_located((By.CSS_SELECTOR, like_button_css_selector_1))
+              )
+              # Click on the like button or perform desired action
+              like_button.click()
+              print("Liked the story successfully!")
+          except NoSuchElementException:
+              try:
+                  like_button = WebDriverWait(driver, 120).until(
+                      EC.presence_of_element_located((By.CSS_SELECTOR, like_button_css_selector_2))
+                  )
+                  # Click on the like button or perform desired action
+                  like_button.click()
+                  print("Liked the story successfully!")
+              except NoSuchElementException:
+                  # Both CSS selectors failed, skip to the next action or user
+                  print("Failed to like the story.")
+                  continue  # Assuming this is inside a loop
 
-    remove_username_from_file(follower, followers_file)
+      except NoSuchElementException:
+          print("[FALSE] User -> " + follower + " has no story up.")
+          continue
 
-    # Close the ChromeDriver instance
-    driver.quit()
+  remove_username_from_file(follower, followers_file)
+
+  # Close the ChromeDriver instance
+  driver.quit()
 
 
 if __name__ == "__main__":
