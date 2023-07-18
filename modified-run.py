@@ -133,7 +133,7 @@ def like_stories(username, password, usernames):
 
       # Check if the "View Story" button exists
       try:
-          div_to_click = WebDriverWait(driver, 60).until(
+          div_to_click = WebDriverWait(driver, 180).until(
               EC.presence_of_element_located((By.CSS_SELECTOR, '_aarf _aarg'))
           )
           driver.execute_script("arguments[0].click();", div_to_click)
