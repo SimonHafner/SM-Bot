@@ -86,22 +86,32 @@ def like_stories(username, password, usernames):
         print(f"Couldn't click the cookie button. {e}")
 
     # Finden Sie das Eingabefeld für den Benutzernamen
-    username_field = WebDriverWait(driver, 20).until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, 'input[name="username"]')))
+    try:
+      username_field = WebDriverWait(driver, 20).until(
+          EC.presence_of_element_located((By.CSS_SELECTOR, 'input[name="username"]')))
+    except Exception as e:
+        print(f"Couldn't extract input field for username. {e}")
 
     # Geben Sie den Benutzernamen ein
     username_field.send_keys(username)
     
+    try:
     # Finden Sie das Eingabefeld für das Passwort
-    password_field = WebDriverWait(driver, 20).until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, 'input[name="password"]')))
+      password_field = WebDriverWait(driver, 20).until(
+          EC.presence_of_element_located((By.CSS_SELECTOR, 'input[name="password"]')))
+    except Exception as e:
+      print(f"Couldn't extract input field for password. {e}")
 
     # Geben Sie das Passwort ein
     password_field.send_keys(password)
 
     # Finden Sie den Anmelde-Button und klicken Sie darauf
-    login_button = WebDriverWait(driver, 20).until(
-        EC.element_to_be_clickable((By.CSS_SELECTOR, 'button[type="submit"]')))
+    try:
+      login_button = WebDriverWait(driver, 20).until(
+          EC.element_to_be_clickable((By.CSS_SELECTOR, 'button[type="submit"]')))
+    except Exception as e:
+        print(f"Couldn't extract submit button from page. {e}")
+    
     login_button.click()
 
     # Warten Sie eine Weile, bis die Anmeldung verarbeitet wurde
