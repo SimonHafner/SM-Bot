@@ -92,7 +92,7 @@ def like_stories(username, password, usernames):
       username_field = WebDriverWait(driver, 100).until(
           EC.presence_of_element_located((By.CSS_SELECTOR, 'input[name="username"]')))
     except Exception as e:
-        print(f"Couldn't extract input field for username. {e}")
+        print(f"Couldn't extract input field for username.")
 
     # Geben Sie den Benutzernamen ein
     username_field.send_keys(username)
