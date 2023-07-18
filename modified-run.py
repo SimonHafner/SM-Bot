@@ -165,11 +165,10 @@ def like_stories(username, password, usernames):
       except NoSuchElementException:
           print("[FALSE] User -> " + follower + " has no story up.")
           continue
+    remove_username_from_file(follower, followers_file)
 
-  remove_username_from_file(follower, followers_file)
-
-  # Close the ChromeDriver instance
-  driver.quit()
+    # Close the ChromeDriver instance
+    driver.quit()
 
 
 if __name__ == "__main__":
