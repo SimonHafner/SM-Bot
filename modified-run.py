@@ -127,11 +127,12 @@ def like_stories(username, password, usernames):
 
         # Check if the "View Story" button exists
         try:
-            view_story_button = WebDriverWait(driver, 20).until(
+            view_story_button = WebDriverWait(driver, 60).until(  # Increase wait time
                 EC.presence_of_element_located((By.XPATH, "//div/div/div[2]/div/div/div/div[1]/div[1]/section/div[1]/div/section/div/div[1]/div/div/div/div/div[3]/div"))
             )
             print("[TRUE] User -> " + follower + " has story up.")
-            view_story_button.click()                
+            # Execute JavaScript to click the button
+            driver.execute_script("arguments[0].click();", view_story_button)          
             
             try:
                 like_button = WebDriverWait(driver, 20).until(
