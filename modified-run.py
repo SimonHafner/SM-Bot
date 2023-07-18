@@ -130,15 +130,6 @@ def like_stories(username, password, usernames):
 
       # Hypothetical CSS selector for the "View Story" button
       # view_story_css_selector = "div.section"
-      try:
-          view_story_button = WebDriverWait(driver, 60).until(
-              EC.presence_of_element_located((By.XPATH, '//div[contains(text(),"Story ansehen")]'))
-          )
-          print("[TRUE] User -> " + follower + " has story up.")
-          driver.execute_script("arguments[0].click();", view_story_button)
-      except NoSuchElementException:
-          print("No 'Story ansehen' Button was found")
-          # continue  # Skip to the next follower
       
       try:
         like_button = WebDriverWait(driver, 60).until(
