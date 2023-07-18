@@ -130,16 +130,19 @@ def like_stories(username, password, usernames):
 
       # Hypothetical CSS selector for the "View Story" button
       # view_story_css_selector = "div.section"
-
-      css_selector = "div._abx4"
+      print(driver.page_source)
       try:
-          element_to_click = WebDriverWait(driver, 60).until(
-              EC.presence_of_element_located((By.CSS_SELECTOR, css_selector))
-          )
-          driver.execute_script("arguments[0].click();", element_to_click)
-          print("Liked story successfully!")
+        like_button = WebDriverWait(driver, 60).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, 'div.x1i10hfl.x6umtig.x1b1mbwd.xaqea5y.xav7gou.x9f619.xe8uvvx.xdj266r.x11i5rnm.xat24cr.x1mh8g0r.x16tdsg8.x1hl2dhg.xggy1nq.x1a2a7pz.x6s0dn4.xjbqb8w.x1ejq31n.xd10rxx.x1sy0etr.x17r0tee.x1ypdohk.x78zum5.xl56j7k.x1y1aw1k.x1sxyh0.xwib8y2.xurb0ha'))
+        )
+        driver.execute_script("arguments[0].click();", like_button)
+        print("Liked the story successfully!")
+
       except NoSuchElementException:
-          print("Element not found within 60 seconds")
+          print("Failed to like the story.")
+          continue
+
+         
 
           # Hypothetical CSS selectors for the like button
           like_button_css_selector_1 = "div.likeButton1"
