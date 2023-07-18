@@ -60,6 +60,8 @@ def like_stories(username, password, usernames):
     # chrome_options.add_argument("--headless")  # Run Chrome in headless mode
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--headless")  # Run Chrome in headless mode
+
 
     # Set up ChromeDriver service
     service = Service(ChromeDriverManager().install())
