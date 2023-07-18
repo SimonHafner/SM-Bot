@@ -84,6 +84,8 @@ def like_stories(username, password, usernames):
         button.click()
     except Exception as e:
         print(f"Couldn't click the cookie button. {e}")
+    
+    print("Clicked on: Accept all cookies.")
 
     # Finden Sie das Eingabefeld für den Benutzernamen
     try:
