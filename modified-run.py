@@ -125,7 +125,7 @@ def like_stories(username, password, usernames):
     for follower in usernames:
       story_url = f"https://www.instagram.com/stories/{follower}"
       driver.get(story_url)
-
+      time.sleep(2)
       print("Inspecting userpage of '" +str(follower) +"'")
 
       # Hypothetical CSS selector for the "View Story" button
@@ -133,8 +133,8 @@ def like_stories(username, password, usernames):
 
       # Check if the "View Story" button exists
       try:
-          div_to_click = WebDriverWait(driver, 30).until(
-              EC.presence_of_element_located((By.CSS_SELECTOR, 'div._aarf._aarg'))
+          div_to_click = WebDriverWait(driver, 60).until(
+              EC.presence_of_element_located((By.CSS_SELECTOR, '_aarf _aarg'))
           )
           driver.execute_script("arguments[0].click();", div_to_click)
           print("Selected story of user '" +str(follower) +"'")
