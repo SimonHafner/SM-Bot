@@ -125,6 +125,8 @@ def like_stories(username, password, usernames):
         story_url = f"https://www.instagram.com/stories/{follower}"
         driver.get(story_url)
 
+        print("Checking username '" +str(follower) +"'")
+
         # Check if the "View Story" button exists
         try:
             view_story_button = WebDriverWait(driver, 60).until(  # Increase wait time
