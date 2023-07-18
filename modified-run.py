@@ -57,10 +57,11 @@ def remove_username_from_file(username, file_path):
 def like_stories(username, password, usernames):
     # Set up ChromeDriver options
     chrome_options = Options()
-    # chrome_options.add_argument("--headless")  # Run Chrome in headless mode
+    chrome_options.add_argument("--headless")  # Run Chrome in headless mode
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
-    chrome_options.add_argument("--headless")  # Run Chrome in headless mode
+    chrome_options.add_argument("--disable-gpu")  # Disables GPU hardware acceleration
+
 
 
     # Set up ChromeDriver service
